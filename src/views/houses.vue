@@ -8,6 +8,10 @@ function showHouse() {
     showHouses.value = false
     showAdd.value = true
 }
+function returnBack(){
+    showAdd.value = false
+    showHouses.value = true
+}
 </script>
 
 <template>
@@ -21,7 +25,7 @@ function showHouse() {
             <h2>Ranchhouses</h2>
             <h2 class="newHouse" @click="showHouse">New House</h2>
         </div>
-        <addNewHouse v-show="showAdd" />
+        <addNewHouse v-show="showAdd" @goBack="returnBack"/>
     </div>
 </template>
 

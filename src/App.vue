@@ -27,7 +27,6 @@ function goToDash(){
         <div>
             <teleport to='body' >
                     <Login v-show="isVisible" @showLogin="goToDash"/>
-                    <!-- <logout @showLogout="goToLogin" style="display: none;"/> -->
                 </teleport>
         </div>
         <Navigation/>

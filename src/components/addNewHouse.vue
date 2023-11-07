@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 const houseCategory = ref("")
 const houseName = ref("")
@@ -9,6 +10,9 @@ const fileInput = ref(null)
 const selectedFile = ref({ name: 'No file selected.' })
 const successMsg = ref()
 const successModal = ref()
+const router = useRouter()
+// const emit = defineEmits(['goBack'])
+
 
 const editedFileName = computed(() =>{
     if(selectedFile.value.name != 'No file selected.'){
@@ -68,6 +72,7 @@ function handleFileChange(event) {
 function openFileInput() {
     fileInput.value.click();
 }
+
 </script>
 
 <template>
@@ -109,10 +114,18 @@ function openFileInput() {
             <br>
             <button @click="getHouseData" class="addbtn"><img src="@/assets/images/addhouse.png"><span>ADD</span></button>
         </div>
+        <div @click="$emit('goBack')" class="goBack">Back</div>
     </div>
 </template>
 
 <style scoped>
+.goBack{
+    position: relative;
+    bottom: 10%;
+    text-decoration: underline;
+    cursor: pointer;
+    color: blue;
+}
 .success-msg{
     width: 83.7%;
     height: 85%;
