@@ -18,8 +18,8 @@ import { RouterLink, RouterView } from 'vue-router';
                     <span><img src="@/assets/images/houses.png" alt="">
                         <router-link :to="{ name: 'houses' }">Houses</router-link>
                     </span>    
-                    <span><img src="@/assets/images/logout.png" alt="">
-                        <router-link :to="{ name: 'logout' }">Logout</router-link>
+                    <span @click="$emit('loggingOut')" id="logout"><img src="@/assets/images/logout.png" alt="">
+                        <span>Logout</span>
                     </span>
                 </div>
             </div>
@@ -50,16 +50,17 @@ import { RouterLink, RouterView } from 'vue-router';
     width: 200px;
     min-width: 200px;
     padding-left: 50px;
-    padding-top: 50px;
+    padding-top: 40px;
     border-radius: 4px;
-    line-height: 24px;
+    line-height: 60px;
     margin-top: 10.9%;
     height: 77vh;
+    
 }
 .house-category span{
     display: flex; 
     gap: 10px;
-    margin-bottom: 30px;
+    align-items: center;
 
 }
 .house-category span img{
@@ -69,12 +70,17 @@ import { RouterLink, RouterView } from 'vue-router';
 }
 
 a {
-    color: rgb(49, 110, 49);
-    text-decoration: none;
+    color: rgb(49, 110, 49);    
+    text-decoration: none;  
     font-weight: 510;
     display: flex;
     flex-direction: column;
     margin-top: 0.2em;
+}
+#logout{    
+    color: rgb(49, 110, 49);    
+    font-weight: 510;
+    cursor: pointer;
 }
 
 a.router-link-active {

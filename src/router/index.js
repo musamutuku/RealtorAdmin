@@ -4,7 +4,6 @@ import housesView from '../views/houses.vue'
 import usersView from '../views/users.vue'
 import notFoundView from '../views/notFound.vue'
 import loginView from '../components/login.vue'
-import logoutView from '../views/logout.vue'
 
 
 const router = createRouter({
@@ -42,11 +41,6 @@ const router = createRouter({
             path: '/:pathMatch(.*)*', 
             name: 'notFound', 
             component: notFoundView
-        },
-        { 
-            path: "/admin/logout", 
-            name: "logout", 
-            component: logoutView
         }
     ]
 })

@@ -1,6 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue';
-import { useRouter } from 'vue-router';
+import { ref, computed, reactive } from 'vue';
 
 const houseCategory = ref("")
 const houseName = ref("")
@@ -10,8 +9,22 @@ const fileInput = ref(null)
 const selectedFile = ref({ name: 'No file selected.' })
 const successMsg = ref()
 const successModal = ref()
-const router = useRouter()
-// const emit = defineEmits(['goBack'])
+const successModal1 = ref()
+const isdisabled = ref(true)
+
+
+const bgcolor = computed(() => {
+    if(houseName.value != "" &&        
+       houseCategory.value != "" &&
+       housePrice.value != "" &&
+       houseDescription.value != "" && fileInput.value.files.length != 0)
+       {
+        isdisabled.value = false
+        const color = {backgroundColor: '#47963F'}
+        return color
+    }
+    isdisabled.value = true
+})
 
 
 const editedFileName = computed(() =>{
@@ -31,9 +44,9 @@ const editedFileName = computed(() =>{
 )
 
 function getHouseData(event) {
+    successModal.value = true
     let category = houseCategory.value + "s";
         const formData = new FormData();
-        console.log(selectedFile.value);
         formData.append("houseName", houseName.value);
         formData.append("image", selectedFile.value);
         formData.append("description", houseDescription.value);
@@ -47,26 +60,37 @@ function getHouseData(event) {
             if (response.ok) {
                 return response.json();
             } else {
-                throw new Error('Server Error');
+                return response.json();
             }
         })
         .then(data => showSuccess(data.Msg))
         .catch(error => {
             console.error('Error:', error);
+            const newError = "Server could not be reached. Check your network connection!"
+            setTimeout(() => {
+                showSuccess(newError)
+            }, 10000);
         })
 }
 function showSuccess(success){
+    houseName.value = "";
+    houseCategory.value = "";
+    housePrice.value = "";
+    houseDescription.value = "";
+    selectedFile.value = { name: 'No file selected.' }
     successMsg.value = success;
-    successModal.value = true;
+    successModal1.value = true;
+    successModal.value = false;
     setTimeout(() => {
-        successModal.value = false;
-    }, 10000);
+        successModal1.value = false;
+    }, 5000);
 
 }
 
 
 function handleFileChange(event) {
     selectedFile.value = event.target.files[0];
+    
 }
 
 function openFileInput() {
@@ -84,19 +108,24 @@ function openFileInput() {
             </div>
         </div>
         <div class="center-div">
-            <div class="success-msg" v-show="successModal"><p>{{ successMsg }}</p></div>
+            <div class="success-msg" v-show="successModal">
+                <img src="@/assets/images/loader.png" alt="">
+            </div>
+              <div class="success-msg" v-show="successModal1">
+                <p>{{ successMsg }}</p>
+            </div>
             <h3>Add a new House</h3>
             <label for="category">Category</label>
             <select name="" id="category" v-model="houseCategory">
                 <option value="" disabled>Select a category</option>
                 <option value="Apartment">Apartment</option>
                 <option value="Townhouse">Townhouse</option>
-                <option value="Mobilehome">Mobilehome</option>// Query the database using the connection pool
+                <option value="Mobilehome">Mobilehome</option>
                 <option value="Farmhome">Farmhome</option>
                 <option value="Ranchhouse">Ranchhouse</option>
             </select>
             <label for="location">Location</label>
-            <button id="location">Add loc</button><br>
+            <button id="location"><span>Add</span>&nbsp;<img src="@/assets/images/location.png" alt=""></button><br>
             <label for="houseName">Name</label>
             <input type="text" id="houseName" v-model="houseName"><br>
             <label for="image">Image</label>
@@ -112,9 +141,9 @@ function openFileInput() {
                     placeholder="Type house description here..."></textarea>
             </div>
             <br>
-            <button @click="getHouseData" class="addbtn"><img src="@/assets/images/addhouse.png"><span>ADD</span></button>
+            <button @click="getHouseData" class="addbtn" :style="bgcolor" :disabled="isdisabled"><img src="@/assets/images/addhouse.png"><span>ADD</span></button>
         </div>
-        <div @click="$emit('goBack')" class="goBack">Back</div>
+        <div @click="$emit('goBack')" class="goBack">Go Back</div>
     </div>
 </template>
 
@@ -124,21 +153,25 @@ function openFileInput() {
     bottom: 10%;
     text-decoration: underline;
     cursor: pointer;
-    color: blue;
+    color: rgb(4, 4, 87);
+    font-size: 18px;
+    font-family: quicksand;
+    font-weight: 500;
+    width: 90px;
 }
 .success-msg{
-    width: 83.7%;
+    width: 100%;
     height: 85%;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.3);
-    left: 16%;
+    left: 0%;
     z-index: 10;
     text-align: center;
     display: flex;
     justify-content: center;
 }
 .success-msg p{
-     background-color: #24d110;
+     background-color: #c8ddc5;
      width: 30%;
      height: 8%;
      margin-top: 0px;
@@ -147,6 +180,22 @@ function openFileInput() {
      padding-left: 3%;
      box-sizing: border-box;
      font-size: 18px;
+}
+.success-msg img{
+    align-self: center;
+    width: 50px;
+    height: 50px;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 .main-div {
     width: 83.5vw;
@@ -235,11 +284,27 @@ select {
     margin-right: 20px;
 }
 
-#category,
-#location {
+#category{
     margin-bottom: 40px;
     height: 37px;
     font-size: 20px;
+}
+#location img{
+    width: 24px;
+    height: 22px;
+    margin-left: 3px;
+   
+}
+#location {
+    width: 160px;
+    padding-top: 5px;
+    height: 37px;
+    font-size: 20px;
+    box-sizing: border-box;
+}
+#location span{
+    display: inline-block;
+    margin-bottom: 2px
 }
 
 #upload-btn {
@@ -274,11 +339,6 @@ select {
 #upload-img img {
     width: 24px;
     height: 20px;
-}
-
-#location {
-    width: 160px;
-    margin-bottom: 30px;
 }
 
 #houseName {
@@ -328,8 +388,8 @@ textarea {
 }
 
 .addbtn {
-    background-color: #47963F;
-    color: white;
+    background-color: rgb(206, 200, 200);
+    color: white;   ;
     border: none;
     width: 120px;
     height: 40px;

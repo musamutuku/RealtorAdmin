@@ -3,10 +3,10 @@
 
 // const users = ref([])
 
-fetch('http://127.0.0.1:3000/api/users').then(response => response.json())
-    .then(data => localStorage.setItem('users', JSON.stringify(data)));
+fetch('http://127.0.0.1:3000/api/apartments').then(response => response.json())
+.then(data => localStorage.setItem('apartments', JSON.stringify(data)));
 
-const users = JSON.parse(localStorage.getItem('users'))
+const apartments = JSON.parse(localStorage.getItem('apartments'))
 
 
 </script>
@@ -14,7 +14,7 @@ const users = JSON.parse(localStorage.getItem('users'))
 <template>
     <div class="main-div">
         <div class="top-div">
-            <span class="nav-title">Users</span>
+            <span class="nav-title">Apartments</span>
             <div class="admin-profile">
                 <img src="@/assets/images/profile.jpg">
                 <span>Admin <img src="@/assets/images/down_arrow.png"></span>
@@ -25,24 +25,20 @@ const users = JSON.parse(localStorage.getItem('users'))
                 <table>
                     <thead>
                         <tr>
-                            <th>List</th>
-                            <th>Username</th>
-                            <th>Email</th>
-                            <th>Phone</th>
-                            <th>Message</th>
                             <th>HouseID</th>
+                            <th>HouseName</th>
+                            <th>Photo</th>
+                            <th>Price</th>
                             <th>Remove</th>
                             <th>View</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="item in users" :key="item.id">
-                            <td>{{ item.id }}</td>
-                            <td>{{ item.username }}</td>
-                            <td>{{ item.email }}</td>
-                            <td>{{ item.phone }}</td>
-                            <td>{{ item.message }}</td>
-                            <td>{{ item.houseid }}</td>
+                        <tr v-for="house in apartments" :key="house.id">
+                            <td>{{ house.id }}</td>
+                            <td>{{ house.housename }}</td>
+                            <td><img :src ="'/'+house.imagesrc"></td>
+                            <td>{{ house.price }}</td>
                             <td><button>DELETE</button></td>
                             <td><img src="@/assets/images/view.png" alt=""></td>
                         </tr>
@@ -50,13 +46,24 @@ const users = JSON.parse(localStorage.getItem('users'))
                 </table>
             </div>
         </div>
+        <div @click="$emit('goBack1')" class="goBack">Go Back</div>
     </div>
 </template>
 
 <style scoped>
+.goBack{
+    position: relative;
+    bottom: 12%;
+    text-decoration: underline;
+    cursor: pointer;
+    color: rgb(4, 4, 87);
+    font-size: 18px;
+    font-family: quicksand;
+    font-weight: 500;
+    left: 20px;
+}
 .main-div {
     width: 83.5vw;
-    /* height: 80vh; */
 }
 
 .top-div {
@@ -109,7 +116,7 @@ const users = JSON.parse(localStorage.getItem('users'))
     justify-content: center;
     background-color: #FBFBFB;
     padding-top: 1%;
-    height: 84vh;
+    height: 80vh;
     border-radius: 10px;
     font-family: quicksand;
 }
@@ -129,48 +136,62 @@ th{
 }
 td{
     max-width: 300px;
-    width: 200px;
+    width: 250px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    padding: 10px;
 
 }
 td img{
     width: 38px;
     height: 31px;
-    cursor: pointer; 
+    cursor: pointer;
 }
 td:first-child{
     width: 30px;
+    text-align: center;
 }
 td:last-child{
-    width: 140px;
+    width: 100px;
 }
 td:last-child{
     text-align: center;
 }
-td:nth-child(7){
+td:nth-child(3){
+    text-align: center;
+}
+td:nth-child(3) img{
+    width: 90px;
+    height: 50px;
+}
+td:nth-child(4){
+    width: 120px;
+    text-align: center;
+}
+td:nth-child(5){
+    width: 170px;
     text-align: center;
 }
 td:nth-child(6){
-    width: 150px;
-    text-align: center;
+    width: 120px;
 }
 td button{
     color: #D21515;
-    width: 80px;
-    height: 24px;
+    width: 90px;
+    height: 26px;
     font-weight: 500;
     font-family: quicksand; 
     cursor: pointer;
+}
+th:first-child{
+    padding-bottom: 10px;
 }
 .allusers{
     display: flex;
     overflow: scroll;
     justify-content: center;
     width: 1300px;
-    height: 600px; 
+    height: 590px; 
     background: #F3EEEE; 
     padding: 5px;
 }
