@@ -19,6 +19,8 @@ function login() {
         router.push({path: '/admin'})
         const admin = authStore.username;
         localStorage.setItem('admin', JSON.stringify(admin));
+        username.value = "";
+        password.value = "";
         emit('showLogin')
     }
     else{

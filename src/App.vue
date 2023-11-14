@@ -9,6 +9,7 @@ const storedState = JSON.parse(localStorage.getItem('admin'));
 const router = useRouter()
 const showlogout = ref(false)
 
+
 onMounted(() => {
     if (storedState){
         isVisible.value = false;
@@ -24,6 +25,7 @@ function goToDash(){
 function goToLogin(){
     isVisible.value = true;
     showlogout.value = false;
+
 }
 </script>
 
