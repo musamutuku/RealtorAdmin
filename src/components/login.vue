@@ -106,7 +106,8 @@ function hideError(){
     font-family: Quicksand;
     font-size: 25px;
     font-weight: 600;
-    background: #6b6ba3; 
+    /* background: #6b6ba3; */
+    background-color: yellow; 
 }
 .login-form button:hover{
     cursor: pointer;
