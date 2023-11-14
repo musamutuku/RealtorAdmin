@@ -98,7 +98,6 @@ function hideError(){
     text-align: center;
     width: 350px;
     height: 45px; 
-    /* margin-top: 60px; */
     margin-top: 15%;
     border-radius: 5px;
     outline: none;
@@ -106,8 +105,8 @@ function hideError(){
     font-family: Quicksand;
     font-size: 25px;
     font-weight: 600;
-    /* background: #6b6ba3; */
-    background-color: yellow; 
+    background: #6b6ba3;
+
 }
 .login-form button:hover{
     cursor: pointer;
