@@ -7,7 +7,8 @@ const emit = defineEmits(['login'])
 const username = ref("")
 const password = ref("")
 const router = useRouter()
-const loginerror = ref("")
+const loginerror = ref("incorrect username or password")
+const hide = ref('hidden')
 
 function login() {
     const authStore = useAuthStore();
@@ -21,11 +22,11 @@ function login() {
         emit('showLogin')
     }
     else{
-        loginerror.value = "incorrect username or password"
+        hide.value = 'visible'
     }
 }
 function hideError(){
-    loginerror.value = ""
+    hide.value = 'hidden'
 }
 </script>
 
@@ -36,7 +37,7 @@ function hideError(){
             <form @submit.prevent="login">
                 <input type="text" v-model="username" id="username" placeholder="Enter your username" @focus="hideError" required/><br />
                 <input type="password" v-model="password" id="password" placeholder="Enter your password" @focus="hideError" required /><br />
-                <span>{{loginerror}}</span>
+                <span :style="{visibility: hide}">{{loginerror}}</span>
                 <button>Login</button>
             </form>
         </div>
@@ -76,11 +77,12 @@ function hideError(){
 #username{
     margin-bottom: 30px;
 }
-/* .login-form span{
+.login-form span{
     font-size: 14px;
-    margin-right: 29%;
     color: brown;
-} */
+    float: left;
+    margin-left: 10px;
+}
 .login-title{
     color: #FFF;
     text-align: center;
@@ -98,15 +100,14 @@ function hideError(){
     text-align: center;
     width: 350px;
     height: 45px; 
-    margin-top: 15%;
+    margin-top: 17%;
     border-radius: 5px;
     outline: none;
     color: #FDFCFC;
     font-family: Quicksand;
     font-size: 25px;
     font-weight: 600;
-    /* background: #6b6ba3; */
-    background-color: yellow;
+    background: #6b6ba3;
 
 }
 .login-form button:hover{
