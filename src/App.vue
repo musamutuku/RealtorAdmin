@@ -21,7 +21,10 @@ onMounted(() => {
 function goToDash(){
     isVisible.value = false;
 }
-
+function goToLogin(){
+    isVisible.value = true;
+    showlogout.value = false;
+}
 </script>
 
 <template>
@@ -32,7 +35,7 @@ function goToDash(){
             </teleport>
         </div>
         <Navigation  @loggingOut="showlogout=true"/>
-        <Logout v-show="showlogout" @closelogout="showlogout=false"/>
+        <Logout v-show="showlogout" @closelogout="showlogout=false" @showlog="goToLogin"/>
     </div>
 </template>
 

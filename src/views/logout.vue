@@ -1,11 +1,13 @@
 <script setup>
 import { useRouter } from 'vue-router';
 const router = useRouter()
+const emit = defineEmits('showlog')
 
 function remove(){
     localStorage.removeItem('admin');
     router.push({path: '/admin/login'})
-    location.reload()
+    emit('showlog')
+    // location.reload()
 }
 
 </script>
