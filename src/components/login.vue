@@ -76,11 +76,11 @@ function hideError(){
 #username{
     margin-bottom: 30px;
 }
-.login-form span{
+/* .login-form span{
     font-size: 14px;
     margin-right: 29%;
     color: brown;
-}
+} */
 .login-title{
     color: #FFF;
     text-align: center;
