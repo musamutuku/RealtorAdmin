@@ -38,6 +38,9 @@ function remove(){
     margin-right: 5px;
     margin-top: 5px;
 }
+.logout-div img:hover{
+    background-color: rgb(202, 53, 53);
+}
 .logout-div{
     width: 400px;
     height: 200px;

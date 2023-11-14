@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, reactive } from 'vue';
+import { ref, computed } from 'vue';
 
 const houseCategory = ref("")
 const houseName = ref("")
@@ -66,9 +66,8 @@ function getHouseData(event) {
         .then(data => showSuccess(data.Msg))
         .catch(error => {
             console.error('Error:', error);
-            const newError = "Server could not be reached. Check your network connection!"
             setTimeout(() => {
-                showSuccess(newError)
+                showSuccess(error)
             }, 10000);
         })
 }
@@ -177,9 +176,9 @@ function openFileInput() {
      margin-top: 0px;
      display: flex;
      align-items: center;
-     padding-left: 3%;
+     padding-left: 1%;
      box-sizing: border-box;
-     font-size: 18px;
+     font-size: 15px;
 }
 .success-msg img{
     align-self: center;
@@ -204,7 +203,7 @@ function openFileInput() {
 
 .top-div {
     display: flex;
-    height: 14.5%;
+    height: 15.5%;
     background-color: rgba(205, 205, 205, 0.41);
     padding-left: 40%;
 }

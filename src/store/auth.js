@@ -6,7 +6,7 @@ export const useAuthStore = defineStore('auth', () => {
     const password = ref("12345");
 
     function login(username, password) {
-        if (username == 'josehh' && password == '12345') {
+        if (username == 'joseh' && password == '12345') {
             isAuthenticated.value = true;
             return true;
         } else {

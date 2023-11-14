@@ -99,13 +99,11 @@ function hideError(){
     width: 350px;
     height: 45px; 
     margin-top: 60px;
-    font-size: 18px;
-    font-family: Quicksand;
     border-radius: 5px;
     outline: none;
     color: #FDFCFC;
     font-family: Quicksand;
-    font-size: 25px;;
+    font-size: 25px;
     font-weight: 600;
     background: #6b6ba3; 
 }
