@@ -98,7 +98,8 @@ function hideError(){
     text-align: center;
     width: 350px;
     height: 45px; 
-    margin-top: 60px;
+    /* margin-top: 60px; */
+    margin-top: 15%;
     border-radius: 5px;
     outline: none;
     color: #FDFCFC;
