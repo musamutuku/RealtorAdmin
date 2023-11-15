@@ -67,7 +67,7 @@ function getHouseData(event) {
         .catch(error => {
             console.error('Error:', error);
             setTimeout(() => {
-                showSuccess(error)
+                showError(error)
             }, 10000);
         })
 }
@@ -82,7 +82,16 @@ function showSuccess(success){
     successModal.value = false;
     setTimeout(() => {
         successModal1.value = false;
-    }, 5000);
+    }, 2000);
+
+}
+function showError(errorMsg){
+    successMsg.value = errorMsg;
+    successModal1.value = true;
+    successModal.value = false;
+    setTimeout(() => {
+        successModal1.value = false;
+    }, 4000);
 
 }
 

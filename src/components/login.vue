@@ -64,7 +64,7 @@ function hideError(){
     border: 1px solid rgb(214, 208, 208);
     background-color: rgb(244, 244, 248);
     text-align: center;
-    border-radius: 2px;
+    border-radius: 5px;
 }
 .login-form input{
     width: 350px;

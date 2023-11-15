@@ -2,9 +2,20 @@
 import { ref, reactive, computed, toDisplayString } from 'vue';
 import addNewHouse from '@/components/addNewHouse.vue'
 import Apartments from '@/components/apartments.vue';
+import Farmhomes from '../components/farmhomes.vue';
+import Mobilehomes from '../components/mobilehomes.vue';
+import Ranchhouses from '../components/ranchhouses.vue';
+import Townhouses from '../components/townhouses.vue';
 const showHouses = ref(true)
 const showAdd = ref(false)
 const isvisible = ref(false)
+const isvisible1 = ref(false)
+const isvisible2 = ref(false)
+const isvisible3 = ref(false)
+const isvisible4 = ref(false)
+const clickedHouse = ref('')
+const receivedhouse = ref('')
+
 
 function showHouse() {
     showHouses.value = false
@@ -14,14 +25,55 @@ function returnBack(){
     showAdd.value = false
     showHouses.value = true
 }
-function returnBack1(){
-    isvisible.value = false
-    showHouses.value = true
+function returnBack1(data){
+    receivedhouse.value = data;
+    if(receivedhouse.value == 'Apartments'){
+        isvisible.value = false
+        showHouses.value = true
+    }
+    else if(receivedhouse.value == 'Townhouses'){
+        isvisible1.value = false
+        showHouses.value = true
+    }
+    else if(receivedhouse.value == 'Farmhomes'){
+        isvisible2.value = false
+        showHouses.value = true
+    }
+    else if(receivedhouse.value == 'Mobilehomes'){
+        isvisible3.value = false
+        showHouses.value = true
+    }
+    else if(receivedhouse.value == 'Ranchhouses'){
+        isvisible4.value = false
+        showHouses.value = true
+    }
 }
-function showApartments(){
-    isvisible.value = true
-    showHouses.value = false
+function showApartments(event){
+    clickedHouse.value = event.target.innerHTML;
+    const inner = event.target.innerHTML;
+    if(inner == 'Apartments'){
+        isvisible.value = true;
+        showHouses.value = false;
+    }
+    else if(inner == 'Townhouses'){
+        isvisible1.value = true;
+        showHouses.value = false;
+    }
+    if(inner == 'Farmhomes'){
+        isvisible2.value = true;
+        showHouses.value = false;
+    }
+    else if(inner == 'Mobilehomes'){
+        isvisible3.value = true;
+        showHouses.value = false;
+    }
+    else if(inner == 'Ranchhouses'){
+        isvisible4.value = true;
+        showHouses.value = false;
+    }
 }
+
+
 </script>
 
 <template>
@@ -36,16 +88,20 @@ function showApartments(){
         <div class="center-div">
             <ul>
                 <li @click="showApartments">Apartments</li>
-                <li>Townhouses</li>
-                <li>Farmhomes</li>
-                <li>Mobilehomes</li>
-                <li>Ranchhouses</li>
+                <li @click="showApartments">Townhouses</li>
+                <li @click="showApartments">Farmhomes</li>
+                <li @click="showApartments">Mobilehomes</li>
+                <li @click="showApartments">Ranchhouses</li>
             </ul>
             <span @click="showHouse">Add new <br>House</span>
         </div>
     </div>
     <addNewHouse v-show="showAdd" @goBack="returnBack"/>
-    <Apartments v-show="isvisible" @goBack1="returnBack1"/>
+    <Apartments v-show="isvisible" @goBack1="returnBack1" :backpage = "clickedHouse"/>
+    <Townhouses v-show="isvisible1" @goBack1="returnBack1" :backpage = "clickedHouse"/>
+    <Farmhomes v-show="isvisible2" @goBack1="returnBack1" :backpage = "clickedHouse"/>
+    <Mobilehomes v-show="isvisible3" @goBack1="returnBack1" :backpage = "clickedHouse"/>
+    <Ranchhouses v-show="isvisible4" @goBack1="returnBack1" :backpage = "clickedHouse"/>
    
 </template>
 

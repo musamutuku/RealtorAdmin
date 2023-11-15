@@ -8,11 +8,10 @@ function checkGoBack(){
     emit('goBack1', prop.backpage)
 }
 
+fetch('http://127.0.0.1:3000/api/data3').then(response => response.json())
+.then(data => localStorage.setItem('farmhomes', JSON.stringify(data)));
 
-fetch('http://127.0.0.1:3000/api/data').then(response => response.json())
-.then(data => localStorage.setItem('apartments', JSON.stringify(data)));
-
-const apartments = JSON.parse(localStorage.getItem('apartments'))
+const farmhomes = JSON.parse(localStorage.getItem('farmhomes'))
 
 
 </script>
@@ -20,7 +19,7 @@ const apartments = JSON.parse(localStorage.getItem('apartments'))
 <template>
     <div class="main-div">
         <div class="top-div">
-            <span class="nav-title">Apartments</span>
+            <span class="nav-title">Farmhomes</span>
             <div class="admin-profile">
                 <img src="@/assets/images/profile.jpg">
                 <span>Admin <img src="@/assets/images/down_arrow.png"></span>
@@ -40,7 +39,7 @@ const apartments = JSON.parse(localStorage.getItem('apartments'))
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="house in apartments" :key="house.id">
+                        <tr v-for="house in farmhomes" :key="house.id">
                             <td>{{ house.id }}</td>
                             <td>{{ house.housename }}</td>
                             <td><img :src ="'/'+house.imagesrc"></td>
