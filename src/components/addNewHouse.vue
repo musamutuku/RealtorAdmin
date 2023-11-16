@@ -333,7 +333,7 @@ select {
     top: 5px;
     font-size: 20px;
     margin-right: 4.2%;
-    width: 150px;
+    width: 160px;
     height: 25px;
     overflow: hidden;
 }
@@ -359,7 +359,7 @@ select {
 }
 
 #price {
-    width: 190px;
+    width: 180px;
 }
 
 textarea {
